@@ -3,104 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArcPortal | NebuloSonic Command Center</title>
+    <title>ArcPortal | NebuloSonic V2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { --arc-blue: #00e5ff; --arc-purple: #7000ff; --portal-bg: #01010b; }
-        body { background-color: var(--portal-bg); color: white; font-family: 'Rajdhani', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+        body { background-color: var(--portal-bg); color: white; font-family: 'Rajdhani', sans-serif; min-height: 100vh; margin: 0; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
-
-        /* Vahi Subah wala Premium Banner */
-        .portal-bg {
-            background: radial-gradient(circle at center, rgba(0, 229, 255, 0.25) 0%, transparent 75%),
-                        url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1000&q=80');
-            background-size: cover; height: 240px; position: relative; border-bottom: 2px solid var(--arc-blue);
-            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+        .portal-banner {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), var(--portal-bg)), 
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80');
+            background-size: cover; height: 220px; position: relative; border-bottom: 2px solid var(--arc-blue);
         }
-
         .central-logo {
             position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
-            width: 90px; z-index: 10; filter: drop-shadow(0 0 20px var(--arc-blue));
-            animation: float 4s ease-in-out infinite;
+            width: 80px; filter: drop-shadow(0 0 15px var(--arc-blue));
+            animation: pulse 3s infinite ease-in-out;
         }
-
-        @keyframes float { 0%, 100% { transform: translate(-50%, -55%); } 50% { transform: translate(-50%, -45%); } }
-
-        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 16px; }
-        .btn-glow { background: linear-gradient(135deg, var(--arc-purple), var(--arc-blue)); color: black; font-weight: bold; }
-        
-        .ticker-wrap { background: rgba(0, 0, 0, 0.8); border-bottom: 1px solid var(--arc-blue); overflow: hidden; white-space: nowrap; }
-        .ticker { display: inline-block; animation: ticker 25s linear infinite; }
+        @keyframes pulse { 0%, 100% { transform: translate(-50%, -52%); opacity: 0.8; } 50% { transform: translate(-50%, -48%); opacity: 1; } }
+        .glass-box { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 20px; }
+        .action-btn { background: rgba(0, 229, 255, 0.1); border: 1px solid var(--arc-blue); transition: 0.3s; }
+        .action-btn:active { background: var(--arc-blue); color: black; }
+        .ticker-wrap { background: black; border-bottom: 1px solid var(--arc-blue); overflow: hidden; white-space: nowrap; }
+        .ticker { display: inline-block; animation: ticker 20s linear infinite; color: var(--arc-blue); font-size: 10px; padding: 5px 0; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
     </style>
 </head>
 <body>
 
-    <div class="ticker-wrap text-[10px] orbitron text-cyan-400 py-2">
-        <div class="ticker">
-            CORE SYSTEM: ACTIVE ● ARC NETWORK STATUS: STABLE ● BUILDER: AMRISH KUMAR DWIVEDI ● NEBULOSONIC PROTOCOL ACTIVE...
-        </div>
+    <div class="ticker-wrap orbitron">
+        <div class="ticker">SYSTEM STATUS: ACTIVE ● NETWORK: ARC MAINNET ● OPERATOR: AMRISH KUMAR DWIVEDI ● SECURE ACCESS GRANTED ●</div>
     </div>
 
-    <div class="portal-bg">
-        <img src="https://img.icons8.com/color/512/alpha.png" alt="Arc-A" class="central-logo">
+    <div class="portal-banner">
+        <img src="https://img.icons8.com/color/512/alpha.png" class="central-logo">
         <div class="absolute bottom-4 w-full text-center">
-            <h1 class="orbitron text-3xl font-bold tracking-[0.2em]">ARCPORTAL</h1>
-            <p class="text-[9px] text-cyan-400 tracking-widest mt-1">NEBULOSONIC INTERFACE V2</p>
+            <h1 class="orbitron text-2xl font-bold tracking-[0.3em]">ARCPORTAL</h1>
+            <p class="text-[9px] text-cyan-400 tracking-[0.2em]">NEBULOSONIC INTERFACE</p>
         </div>
     </div>
 
-    <main class="p-4 space-y-4">
-        <div class="glass-card p-4 flex flex-col gap-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <div id="statusDot" class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                    <span id="walletAddress" class="text-[10px] font-mono text-cyan-300">DISCONNECTED</span>
-                </div>
-                <span class="text-[9px] orbitron bg-blue-900/50 px-2 py-1 rounded border border-blue-400">ARC NETWORK</span>
+    <main class="p-5 space-y-4 max-w-md mx-auto">
+        <div class="glass-box p-4">
+            <div class="flex justify-between items-center mb-3">
+                <span id="statusTxt" class="text-[10px] orbitron text-red-500 italic">SYSTEM OFFLINE</span>
+                <div id="dot" class="w-2 h-2 bg-red-500 rounded-full"></div>
             </div>
-            <button onclick="connectArc()" id="connectBtn" class="btn-glow py-3 rounded-xl orbitron text-xs">CONNECT ARC WALLET</button>
+            <button onclick="connect()" id="mainBtn" class="w-full py-4 rounded-xl font-bold orbitron text-xs bg-cyan-500 text-black shadow-[0_0_20px_rgba(0,229,255,0.4)]">
+                INITIALIZE CONNECTION
+            </button>
         </div>
 
-        <div class="glass-card p-5">
-            <span class="text-gray-400 text-[10px] orbitron uppercase text-xs">Total ARC Balance</span>
-            <h2 id="balanceDisplay" class="text-4xl font-bold text-white orbitron mt-1">0.00</h2>
+        <div class="glass-box p-5 text-center">
+            <p class="text-[10px] text-gray-400 orbitron mb-1">CURRENT ARC BALANCE</p>
+            <h2 id="bal" class="text-4xl font-bold font-mono">0.0000</h2>
+            <p id="userAddr" class="text-[8px] text-cyan-900 mt-2 break-all font-mono"></p>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
-            <button onclick="alert('Sending ARC...')" class="glass-card py-5 font-bold orbitron text-[10px] hover:bg-cyan-500/10 transition">SEND ARC</button>
-            <button onclick="alert('Swap Interface Loading...')" class="glass-card py-5 font-bold orbitron text-[10px] hover:bg-cyan-500/10 transition">SMART SWAP</button>
-            <button onclick="alert('Bridge Initialized...')" class="glass-card py-5 font-bold orbitron text-[10px] hover:bg-cyan-500/10 transition">BRIDGE</button>
-            <button onclick="alert('Agent Hub Active')" class="glass-card py-5 font-bold orbitron text-[10px] hover:bg-cyan-500/10 transition">AGENT HUB</button>
+            <button onclick="alert('Sending...')" class="action-btn py-4 rounded-xl text-[10px] orbitron font-bold">SEND ARC</button>
+            <button onclick="alert('Swapping...')" class="action-btn py-4 rounded-xl text-[10px] orbitron font-bold">SMART SWAP</button>
+            <button onclick="alert('Bridging...')" class="action-btn py-4 rounded-xl text-[10px] orbitron font-bold">ARC BRIDGE</button>
+            <button onclick="alert('Agent Hub...')" class="action-btn py-4 rounded-xl text-[10px] orbitron font-bold">AGENT HUB</button>
         </div>
     </main>
 
-    <footer class="mt-auto p-4 text-center border-t border-cyan-900/30">
-        <p class="text-[9px] text-cyan-900 orbitron">NEBULOSONIC SECURE TERMINAL | AMRISH KUMAR DWIVEDI</p>
-    </footer>
-
     <script>
-        async function connectArc() {
+        async function connect() {
             if (window.ethereum) {
                 try {
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const accounts = await provider.send("eth_requestAccounts", []);
-                    const address = accounts[0];
-                    const balance = await provider.getBalance(address);
+                    const balance = await provider.getBalance(accounts[0]);
                     
-                    document.getElementById('walletAddress').innerText = address.substring(0,6) + "..." + address.substring(38);
-                    document.getElementById('balanceDisplay').innerText = parseFloat(ethers.utils.formatEther(balance)).toFixed(4);
-                    document.getElementById('statusDot').classList.replace('bg-red-500', 'bg-green-500');
-                    document.getElementById('statusDot').classList.remove('animate-pulse');
-                    document.getElementById('connectBtn').innerText = "SYSTEM CONNECTED";
-                    document.getElementById('connectBtn').classList.replace('btn-glow', 'bg-cyan-900/20');
-                    document.getElementById('connectBtn').style.color = "#00e5ff";
-                } catch (e) { alert("Connection Error"); }
-            } else { alert("Please use Mises Browser"); }
+                    document.getElementById('userAddr').innerText = accounts[0];
+                    document.getElementById('bal').innerText = parseFloat(ethers.utils.formatEther(balance)).toFixed(4);
+                    document.getElementById('mainBtn').innerText = "CONNECTION STABLE";
+                    document.getElementById('mainBtn').style.background = "transparent";
+                    document.getElementById('mainBtn').style.color = "#00e5ff";
+                    document.getElementById('mainBtn').style.border = "1px solid #00e5ff";
+                    document.getElementById('statusTxt').innerText = "SYSTEM ONLINE";
+                    document.getElementById('statusTxt').classList.replace('text-red-500', 'text-green-500');
+                    document.getElementById('dot').classList.replace('bg-red-500', 'bg-green-500');
+                } catch (e) { alert("Access Denied"); }
+            } else { alert("Please use Mises Browser Wallet!"); }
         }
     </script>
 </body>
-    </html>
-                
+</html>
