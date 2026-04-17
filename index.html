@@ -11,148 +11,90 @@
         :root { --arc-blue: #00e5ff; --arc-purple: #7000ff; --portal-bg: #01010b; }
         body { background-color: var(--portal-bg); color: white; font-family: 'Rajdhani', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
-
-        /* Enhanced Portal Banner */
         .portal-bg {
             background: radial-gradient(circle at center, rgba(0, 229, 255, 0.25) 0%, transparent 75%),
                         url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1000&q=80');
-            background-size: cover;
-            height: 280px;
-            position: relative;
-            border-bottom: 2px solid var(--arc-blue);
-            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+            background-size: cover; height: 260px; position: relative; border-bottom: 2px solid var(--arc-blue);
         }
-
-        /* Logo Pulse Effect */
         .central-logo {
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px;
-            z-index: 10;
-            filter: drop-shadow(0 0 20px var(--arc-blue));
+            position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);
+            width: 90px; z-index: 10; filter: drop-shadow(0 0 20px var(--arc-blue));
             animation: float 4s ease-in-out infinite;
         }
-
-        @keyframes float {
-            0%, 100% { transform: translate(-50%, -55%); filter: drop-shadow(0 0 15px var(--arc-blue)); }
-            50% { transform: translate(-50%, -45%); filter: drop-shadow(0 0 30px var(--arc-purple)); }
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 229, 255, 0.2);
-            border-radius: 16px;
-        }
-
-        .glow-button {
-            background: linear-gradient(135deg, var(--arc-purple), var(--arc-blue));
-            transition: 0.4s;
-            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
-        }
-
+        @keyframes float { 0%, 100% { transform: translate(-50%, -55%); } 50% { transform: translate(-50%, -45%); } }
+        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 16px; }
+        .glow-button { background: linear-gradient(135deg, var(--arc-purple), var(--arc-blue)); box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3); }
         .ticker-wrap { background: rgba(0, 0, 0, 0.8); border-bottom: 1px solid var(--arc-blue); overflow: hidden; white-space: nowrap; }
         .ticker { display: inline-block; animation: ticker 25s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
     </style>
 </head>
-<body class="flex flex-col">
+<body>
 
     <div class="ticker-wrap text-[10px] orbitron text-cyan-400 py-2">
         <div class="ticker">
-            CORE SYSTEM: ACTIVE ● NODE STATUS: STABLE ● ARC NETWORK TPS: 14,200 ● GAS: LOW ● AMRIKH KUMAR DWIVEDI CONNECTED...
+            CORE SYSTEM: ACTIVE ● NODE STATUS: STABLE ● ARC NETWORK TPS: 14,200 ● BUILDER: AMRISH KUMAR DWIVEDI CONNECTED...
         </div>
     </div>
 
     <div class="portal-bg">
         <img src="https://img.icons8.com/color/512/alpha.png" alt="Arc-A" class="central-logo">
         <div class="absolute bottom-6 w-full text-center">
-            <h1 class="orbitron text-4xl font-bold tracking-[0.2em] text-white">ARCPORTAL</h1>
-            <p class="text-[10px] text-cyan-400 tracking-widest mt-1">NEBULOSONIC INTERFACE V2</p>
+            <h1 class="orbitron text-3xl font-bold tracking-[0.2em]">ARCPORTAL</h1>
+            <p class="text-[9px] text-cyan-400 tracking-widest mt-1 text-uppercase">NEBULOSONIC COMMAND CENTER</p>
         </div>
     </div>
 
-    <main class="p-4 flex-grow space-y-4">
-        
+    <main class="p-4 space-y-4">
         <div class="flex justify-between items-center glass-card p-3">
             <button onclick="connectWallet()" id="connectBtn" class="flex items-center gap-2">
                 <div id="statusDot" class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                <span id="walletAddress" class="text-xs font-mono text-cyan-300">CLICK TO CONNECT</span>
+                <span id="walletAddress" class="text-xs font-mono text-cyan-300 uppercase">Connect Wallet</span>
             </button>
-            <span class="bg-blue-900 text-[9px] px-2 py-1 rounded border border-blue-400 orbitron">VERIFIED BUILDER</span>
+            <span class="bg-blue-900 text-[9px] px-2 py-1 rounded border border-blue-400 orbitron uppercase">Verified Builder</span>
         </div>
 
-        <div class="glass-card p-5 relative overflow-hidden">
-            <span class="text-gray-400 text-xs orbitron">TOTAL ASSETS</span>
-            <h2 id="balanceDisplay" class="text-4xl font-bold text-white orbitron mt-1">$0.00</h2>
-            <div class="mt-4 flex items-center justify-between">
-                <span class="text-[10px] text-cyan-400">GAS TANK: <span id="gasLevel">90%</span></span>
-                <span class="text-[10px] text-purple-400">ROBINHOOD TESTNET</span>
+        <div class="glass-card p-5">
+            <span class="text-gray-400 text-[10px] orbitron">PORTFOLIO VALUE</span>
+            <h2 id="balanceDisplay" class="text-3xl font-bold text-white orbitron mt-1">$0.00</h2>
+            <div class="mt-4 flex flex-col gap-2">
+                <div class="flex justify-between text-[11px] border-b border-white/10 pb-1">
+                    <span>ARC TOKEN</span> <span class="text-cyan-400">1,250.00</span>
+                </div>
+                <div class="flex justify-between text-[11px] border-b border-white/10 pb-1">
+                    <span>USDC</span> <span class="text-cyan-400">450.00</span>
+                </div>
             </div>
-            <div class="mt-2 h-1 bg-gray-800 rounded-full">
-                <div class="h-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full w-[90%]"></div>
-            </div>
         </div>
 
-        <div class="relative">
-            <input type="text" placeholder="Tell AI: 'Deploy NFT' or 'Swap USDC'" class="w-full bg-black/60 border border-cyan-500/40 p-4 rounded-xl text-sm focus:outline-none focus:border-cyan-300 orbitron shadow-inner">
-            <span class="absolute right-4 top-4">🚀</span>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
-            <button onclick="playAction('SEND')" class="glow-button py-5 rounded-2xl font-bold orbitron text-sm">SEND</button>
-            <button onclick="playAction('SWAP')" class="glow-button py-5 rounded-2xl font-bold orbitron text-sm">SMART SWAP</button>
-            <button onclick="playAction('BRIDGE')" class="glow-button py-5 rounded-2xl font-bold orbitron text-sm">BRIDGE</button>
-            <button onclick="playAction('AGENTS')" class="glow-button py-5 rounded-2xl font-bold orbitron text-sm">AGENT HUB</button>
+        <div class="grid grid-cols-2 gap-3">
+            <button onclick="playAction('SEND')" class="glow-button py-4 rounded-xl font-bold orbitron text-[11px]">SEND</button>
+            <button onclick="playAction('SWAP')" class="glow-button py-4 rounded-xl font-bold orbitron text-[11px]">SMART SWAP</button>
+            <button onclick="playAction('BRIDGE')" class="glow-button py-4 rounded-xl font-bold orbitron text-[11px]">BRIDGE</button>
+            <button onclick="playAction('AGENTS')" class="glow-button py-4 rounded-xl font-bold orbitron text-[11px]">AGENT HUB</button>
         </div>
     </main>
 
-    <footer class="p-6 bg-black/40 border-t border-cyan-900/30 text-center">
-        <div class="flex justify-center gap-8 text-[11px] text-gray-400 orbitron mb-4">
-            <a href="#">TWITTER</a>
-            <a href="#">DISCORD</a>
-            <a href="#">ARC HOUSE</a>
-        </div>
-        <div class="text-[9px] text-cyan-800 tracking-widest">
-            ENCRYPTED BACKUP: ACTIVE | BUILDER: AMRIKH KUMAR DWIVEDI
-        </div>
+    <footer class="mt-auto p-6 text-center border-t border-cyan-900/30">
+        <p class="text-[9px] text-cyan-800 orbitron">ARCPORTAL BY AMRISH KUMAR DWIVEDI | 2026</p>
     </footer>
 
     <script>
-        // BEES SOUND EFFECT
         function playAction(type) {
-            const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3');
-            audio.play();
-            alert(type + " Action Initiated on Arc Network!");
+            new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3').play();
+            alert(type + " System Ready on Arc Testnet!");
         }
 
-        // LIVE WALLET CONNECTION
         async function connectWallet() {
             if (window.ethereum) {
-                try {
-                    const provider = new ethers.providers.Web3Provider(window.ethereum);
-                    const accounts = await provider.send("eth_requestAccounts", []);
-                    const address = accounts[0];
-                    
-                    document.getElementById('walletAddress').innerText = address.substring(0,6) + "..." + address.substring(38);
-                    document.getElementById('statusDot').classList.replace('bg-red-500', 'bg-green-500');
-                    document.getElementById('connectBtn').classList.add('pointer-events-none');
-
-                    // Fetch Real Balance (ETH/Arc Testnet)
-                    const balance = await provider.getBalance(address);
-                    const ethBalance = ethers.utils.formatEther(balance);
-                    document.getElementById('balanceDisplay').innerText = parseFloat(ethBalance).toFixed(4) + " ETH";
-                    
-                } catch (err) {
-                    console.error("Connection Failed", err);
-                }
-            } else {
-                alert("Mises or Metamask not found!");
-            }
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const accounts = await provider.send("eth_requestAccounts", []);
+                document.getElementById('walletAddress').innerText = accounts[0].substring(0,6) + "..." + accounts[0].substring(38);
+                document.getElementById('statusDot').classList.replace('bg-red-500', 'bg-green-500');
+                const balance = await provider.getBalance(accounts[0]);
+                document.getElementById('balanceDisplay').innerText = parseFloat(ethers.utils.formatEther(balance)).toFixed(4) + " ETH";
+            } else { alert("Please use Mises Browser!"); }
         }
     </script>
 </body>
-            </html>
-    
+</html>
